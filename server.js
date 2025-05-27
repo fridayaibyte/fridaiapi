@@ -8,13 +8,27 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+// ✅ CORS Setup — allow your Netlify frontend origin
+app.use(cors({
+  origin: 'https://hellofriday.netlify.app',
+  methods: ['POST'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 const together = new Together({
   apiKey: process.env.TOGETHER_API_KEY,
 });
 
+// ✅ Optional: Preflight handler (good to have)
+app.options('/api/friday-chat', cors({
+  origin: 'https://hellofriday.netlify.app',
+  methods: ['POST'],
+  credentials: true
+}));
+
+// ✅ Main chat handler
 app.post('/api/friday-chat', async (req, res) => {
   const { message } = req.body;
 
