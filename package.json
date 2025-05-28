@@ -10,6 +10,6 @@
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "together-ai": "git+https://github.com/togethercomputer/together-ai.git"
+"together-ai": "^0.2.2"
   }
 }
